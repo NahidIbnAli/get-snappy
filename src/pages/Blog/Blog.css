@@ -1,0 +1,10 @@
+.gridRow {
+  display: grid;
+  gap: 25px;
+}
+
+@media screen and (min-width: 1140px) {
+  .w-40 {
+    width: 40% !important;
+  }
+}
