@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
+import { Link } from "react-router-dom";
 
 const ServiceItem = ({ service }) => {
   const { _id, image, name, price, description } = service;
@@ -20,7 +21,9 @@ const ServiceItem = ({ service }) => {
         </div>
         <div className="d-flex justify-content-between align-items-center pt-3">
           <Card.Text className="fw-semibold m-0">${price}</Card.Text>
-          <Button variant="dark">View Details</Button>
+          <Link to={`/services/${_id}`}>
+            <Button variant="dark">View Details</Button>
+          </Link>
         </div>
       </Card.Body>
     </Card>

@@ -26,10 +26,14 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link className="text-decoration-none text-dark">Services</Link>
+                <Link to="/services" className="text-decoration-none text-dark">
+                  Services
+                </Link>
               </li>
               <li>
-                <Link className="text-decoration-none text-dark">Blog</Link>
+                <Link to="/blog" className="text-decoration-none text-dark">
+                  Blog
+                </Link>
               </li>
             </ul>
           </div>

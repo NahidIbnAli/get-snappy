@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import ServiceItem from "./ServiceItem";
 
 const ServicesContainer = () => {
-  const [services, setServices] = useState();
+  const [services, setServices] = useState([]);
   useEffect(() => {
     fetch("http://localhost:5000/services?limited=true")
       .then((res) => res.json())
