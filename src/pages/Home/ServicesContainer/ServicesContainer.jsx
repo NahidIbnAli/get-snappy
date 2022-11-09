@@ -16,7 +16,7 @@ const ServicesContainer = () => {
   return (
     <div className="py-5 text-center">
       <Container>
-        <h2 className="display-5 fw-semibold">Services</h2>
+        <h2 className="display-5 fw-semibold">Service</h2>
         <p>
           Whether you're looking for photos to utilize on your company website,
           for social media, or in an advertisement, Get Snappy offers a variety
