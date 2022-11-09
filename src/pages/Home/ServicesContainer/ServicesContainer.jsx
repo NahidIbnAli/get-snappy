@@ -16,8 +16,8 @@ const ServicesContainer = () => {
   return (
     <div className="py-5 text-center">
       <Container>
-        <h2 className="display-5 fw-semibold">Service</h2>
-        <p>
+        <h2 className="display-5 fw-semibold">My Services</h2>
+        <p className="text-muted">
           Whether you're looking for photos to utilize on your company website,
           for social media, or in an advertisement, Get Snappy offers a variety
           of professional photography service.
@@ -30,7 +30,9 @@ const ServicesContainer = () => {
           ))}
         </Row>
         <Link to="/services">
-          <Button className="px-4 mt-3">See All</Button>
+          <Button variant="dark" className="px-4 mt-3">
+            See All
+          </Button>
         </Link>
       </Container>
     </div>
