@@ -21,6 +21,11 @@ const Footer = () => {
             <h5>Quick Links</h5>
             <ul className="p-0 list-unstyled">
               <li>
+                <Link to="/" className="text-decoration-none text-dark">
+                  Home
+                </Link>
+              </li>
+              <li>
                 <Link className="text-decoration-none text-dark">Services</Link>
               </li>
               <li>
