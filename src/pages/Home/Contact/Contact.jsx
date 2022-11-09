@@ -1,12 +1,12 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import image from "../../assets/Mail sent-rafiki.png";
+import image from "../../../assets/Mail sent-rafiki.png";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 const Contact = () => {
   return (
-    <div className="pb-5">
+    <div>
       <Container>
         <h3 className="text-center display-5 fw-semibold mb-3">Get In Touch</h3>
         <Row className="align-items-center">

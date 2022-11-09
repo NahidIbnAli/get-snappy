@@ -1,0 +1,5 @@
+@media screen and (min-width: 1140px) {
+  .w-half {
+    width: 40% !important;
+  }
+}
