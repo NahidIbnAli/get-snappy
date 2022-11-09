@@ -1,12 +1,18 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { PhotoProvider, PhotoView } from "react-photo-view";
+import "react-photo-view/dist/react-photo-view.css";
 
 const ServiceItem = ({ service }) => {
   const { _id, image, name, price, description } = service;
   return (
     <Card className="h-100">
-      <Card.Img variant="top" src={image} />
+      <PhotoProvider>
+        <PhotoView src={image}>
+          <Card.Img variant="top" src={image} />
+        </PhotoView>
+      </PhotoProvider>
       <Card.Body className="d-flex flex-column justify-content-between">
         <div>
           <Card.Title>{name}</Card.Title>
