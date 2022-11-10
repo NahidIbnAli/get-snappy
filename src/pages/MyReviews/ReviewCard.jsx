@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 
-const ReviewCard = ({ review }) => {
+const ReviewCard = ({ review, handleDelete }) => {
   const { _id, image, serviceName, message } = review;
   return (
     <Card className="h-100">
@@ -20,7 +20,9 @@ const ReviewCard = ({ review }) => {
         </div>
         <div className="d-flex justify-content-between align-items-center pt-3">
           <Button variant="dark">Edit Review</Button>
-          <Button variant="dark">Delete Review</Button>
+          <Button onClick={() => handleDelete(_id)} variant="dark">
+            Delete Review
+          </Button>
         </div>
       </Card.Body>
     </Card>
