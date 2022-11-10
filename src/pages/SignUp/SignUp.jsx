@@ -1,5 +1,13 @@
 import React, { useContext } from "react";
-import { Card, Col, Container, Form, Row, Button } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Container,
+  Form,
+  Row,
+  Button,
+  Spinner,
+} from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import image from "../../assets/Privacy policy-rafiki.png";
@@ -7,7 +15,8 @@ import { AuthContext } from "../../contexts/UserContext";
 import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
-  const { signUp, signInGoogle, updateUserProfile } = useContext(AuthContext);
+  const { signUp, signInGoogle, updateUserProfile, loading, setLoading } =
+    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -24,9 +33,11 @@ const SignUp = () => {
         form.reset();
         updateUserProfile(name, photoUrl);
         navigate(from, { replace: true });
-        console.log(result.user);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        setLoading(false);
+        console.error(error);
+      });
   };
 
   const handleSignInWithGoogle = () => {
@@ -98,7 +109,11 @@ const SignUp = () => {
                       className="w-100 fw-semibold"
                       type="submit"
                     >
-                      Sign Up
+                      {loading ? (
+                        <Spinner animation="border" variant="light" />
+                      ) : (
+                        <span>Sign Up</span>
+                      )}
                     </Button>
                   </Form.Group>
                 </Form>

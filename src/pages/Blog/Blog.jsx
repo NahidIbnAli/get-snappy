@@ -9,7 +9,6 @@ const Blog = () => {
       <Helmet>
         <title>Blog</title>
       </Helmet>
-      ;
       <Container className="w-40">
         <div className="gridRow">
           <div className="p-4 rounded-4 bg-light">

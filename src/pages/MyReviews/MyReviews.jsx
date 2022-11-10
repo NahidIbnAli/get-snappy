@@ -12,7 +12,9 @@ const MyReviews = () => {
   useEffect(() => {
     fetch(`https://get-snappy-server.vercel.app/reviews?email=${user?.email}`)
       .then((res) => res.json())
-      .then((data) => setReviews(data))
+      .then((data) => {
+        setReviews(data);
+      })
       .catch((error) => console.error(error));
   }, [user?.email]);
 
@@ -39,7 +41,6 @@ const MyReviews = () => {
       <Helmet>
         <title>My Reviews</title>
       </Helmet>
-      ;
       <Container>
         {reviews.length === 0 ? (
           <h3 className="display-4 text-center">No reviews were added</h3>

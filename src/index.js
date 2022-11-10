@@ -10,11 +10,11 @@ import { HelmetProvider } from "react-helmet-async";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <UserContext>
-      <HelmetProvider>
+    <HelmetProvider>
+      <UserContext>
         <App />
-      </HelmetProvider>
-    </UserContext>
+      </UserContext>
+    </HelmetProvider>
   </React.StrictMode>
 );
 

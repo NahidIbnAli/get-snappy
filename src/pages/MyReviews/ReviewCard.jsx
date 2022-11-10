@@ -1,8 +1,9 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { Link } from "react-router-dom";
 
-const ReviewCard = ({ review, handleDelete }) => {
+const ReviewCard = ({ review, handleDelete, handleUpdate }) => {
   const { _id, image, serviceName, message } = review;
   return (
     <Card className="h-100">
@@ -19,7 +20,9 @@ const ReviewCard = ({ review, handleDelete }) => {
           <Card.Text className="py-3">{message}</Card.Text>
         </div>
         <div className="d-flex justify-content-between align-items-center pt-3">
-          <Button variant="dark">Edit Review</Button>
+          <Link to={`/reviews/${_id}`}>
+            <Button variant="dark">Edit Review</Button>
+          </Link>
           <Button onClick={() => handleDelete(_id)} variant="dark">
             Delete Review
           </Button>

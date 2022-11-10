@@ -1,17 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
-import { AuthContext } from "../../contexts/UserContext";
 import ServiceItem from "../Home/ServicesContainer/ServiceItem";
 
 const Services = () => {
   const [services, setServices] = useState([]);
-  const { loading } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("https://get-snappy-server.vercel.app/services")
       .then((res) => res.json())
-      .then((data) => setServices(data))
+      .then((data) => {
+        setServices(data);
+        setLoading(false);
+      })
       .catch((error) => console.error(error));
   }, []);
 

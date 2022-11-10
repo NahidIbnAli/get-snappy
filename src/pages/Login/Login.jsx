@@ -1,5 +1,13 @@
 import React, { useContext, useState } from "react";
-import { Card, Col, Container, Form, Row, Button } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  Container,
+  Form,
+  Row,
+  Button,
+  Spinner,
+} from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import image from "../../assets/Privacy policy-rafiki.png";
@@ -8,7 +16,7 @@ import { AuthContext } from "../../contexts/UserContext";
 import { Helmet } from "react-helmet-async";
 
 const Login = () => {
-  const { signIn, signInGoogle } = useContext(AuthContext);
+  const { signIn, signInGoogle, loading, setLoading } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,6 +34,7 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
+        setLoading(false);
         setErrorMessage(error.message);
       });
   };
@@ -84,7 +93,11 @@ const Login = () => {
                       className="w-100 fw-semibold"
                       type="submit"
                     >
-                      Login
+                      {loading ? (
+                        <Spinner animation="border" variant="light" />
+                      ) : (
+                        <span>Login</span>
+                      )}
                     </Button>
                   </Form.Group>
                 </Form>

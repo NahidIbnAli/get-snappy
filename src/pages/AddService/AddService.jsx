@@ -42,7 +42,6 @@ const AddService = () => {
       <Helmet>
         <title>Add Service</title>
       </Helmet>
-      ;
       <Container className="py-5">
         <h2 className="text-center display-5 fw-semibold mb-4">
           Add New Service

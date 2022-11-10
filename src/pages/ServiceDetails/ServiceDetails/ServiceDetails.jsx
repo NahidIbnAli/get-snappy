@@ -57,7 +57,6 @@ const ServiceDetails = () => {
       <Helmet>
         <title>Services Details</title>
       </Helmet>
-      ;
       <Container className="pt-3 pb-5">
         {/* service details section */}
         <Row className="g-5">
