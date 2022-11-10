@@ -5,6 +5,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../../contexts/UserContext";
 import Review from "../Reviews/Review";
 import "./ServiceDetails.css";
+import { toast } from "react-hot-toast";
 
 const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
@@ -43,9 +44,8 @@ const ServiceDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         form.reset();
-
         if (data.acknowledged) {
-          alert("Review Submited Successfully");
+          toast.success("Review Submited Successfully");
         }
       })
       .catch((error) => console.error(error));

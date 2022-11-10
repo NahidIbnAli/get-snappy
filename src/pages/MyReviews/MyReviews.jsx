@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { AuthContext } from "../../contexts/UserContext";
 import ReviewCard from "./ReviewCard";
+import { toast } from "react-hot-toast";
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
@@ -26,6 +27,7 @@ const MyReviews = () => {
         .then((data) => {
           const filterdReviews = reviews.filter((review) => review._id !== id);
           setReviews(filterdReviews);
+          toast.success("Deleted Successfully");
         })
         .catch((error) => console.error(error));
     }
@@ -34,16 +36,20 @@ const MyReviews = () => {
   return (
     <div className="py-5">
       <Container>
-        <Row className="g-4">
-          {reviews.map((review) => (
-            <Col md="6" lg="4" key={review._id}>
-              <ReviewCard
-                review={review}
-                handleDelete={handleDelete}
-              ></ReviewCard>
-            </Col>
-          ))}
-        </Row>
+        {reviews.length === 0 ? (
+          <h3 className="display-4 text-center">No reviews were added</h3>
+        ) : (
+          <Row className="g-4">
+            {reviews.map((review) => (
+              <Col md="6" lg="4" key={review._id}>
+                <ReviewCard
+                  review={review}
+                  handleDelete={handleDelete}
+                ></ReviewCard>
+              </Col>
+            ))}
+          </Row>
+        )}
       </Container>
     </div>
   );
