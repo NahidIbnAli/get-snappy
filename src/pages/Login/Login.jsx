@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Card, Col, Container, Form, Row, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import image from "../../assets/Privacy policy-rafiki.png";
 import "./Login.css";
@@ -9,6 +9,9 @@ import { AuthContext } from "../../contexts/UserContext";
 const Login = () => {
   const { signIn, signInGoogle } = useContext(AuthContext);
   const [errorMessage, setErrorMessage] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
   const handleSignIn = (event) => {
     event.preventDefault();
@@ -19,6 +22,7 @@ const Login = () => {
       .then((result) => {
         form.reset();
         setErrorMessage(false);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -28,6 +32,7 @@ const Login = () => {
   const handleSignInWithGoogle = () => {
     signInGoogle()
       .then((result) => {
+        navigate(from, { replace: true });
         console.log(result.user);
       })
       .catch((error) => console.error(error));

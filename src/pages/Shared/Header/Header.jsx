@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.png";
+import { AuthContext } from "../../../contexts/UserContext";
 
 const Header = () => {
+  const { user, signOutUser } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => console.log("Sign-out Successful"))
+      .catch((error) => console.error(error));
+  };
+
   return (
     <Navbar className="sticky-top" bg="light" expand="lg">
       <Container>
@@ -19,12 +29,36 @@ const Header = () => {
             <Link to="/" className="nav-link">
               Home
             </Link>
+            <Link to="/services" className="nav-link">
+              Services
+            </Link>
+            {user?.uid && (
+              <>
+                <Link to="/myreviews" className="nav-link">
+                  My Reviews
+                </Link>
+                <Link to="/addservice" className="nav-link">
+                  Add Service
+                </Link>
+              </>
+            )}
+
             <Link to="/blog" className="nav-link">
               Blog
             </Link>
-            <Link to="/login" className="nav-link">
-              Login
-            </Link>
+            {user?.uid ? (
+              <Button
+                variant="dark"
+                onClick={handleSignOut}
+                className="rounded-pill"
+              >
+                Logout
+              </Button>
+            ) : (
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

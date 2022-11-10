@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 import { Card, Col, Container, Form, Row, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import image from "../../assets/Privacy policy-rafiki.png";
 import { AuthContext } from "../../contexts/UserContext";
 
 const SignUp = () => {
   const { signUp, signInGoogle, updateUserProfile } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -19,6 +22,7 @@ const SignUp = () => {
       .then((result) => {
         form.reset();
         updateUserProfile(name, photoUrl);
+        navigate(from, { replace: true });
         console.log(result.user);
       })
       .catch((error) => console.error(error));
@@ -27,7 +31,7 @@ const SignUp = () => {
   const handleSignInWithGoogle = () => {
     signInGoogle()
       .then((result) => {
-        console.log(result.user);
+        navigate(from, { replace: true });
       })
       .catch((error) => console.error(error));
   };
