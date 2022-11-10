@@ -6,6 +6,18 @@ import "./ServiceDetails.css";
 
 const ServiceDetails = () => {
   const { _id, image, name, price, description } = useLoaderData();
+
+  const handleSubmitReview = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const review = form.review.value;
+    const user = {
+      serviceId: _id,
+      // email,
+      review,
+    };
+    fetch("");
+  };
   return (
     <div>
       <Container className="w-half pt-3 pb-5">
@@ -26,13 +38,16 @@ const ServiceDetails = () => {
         </Card>
         {/* review section */}
         {/* form for adding review */}
-        <Form className="shadow-sm rounded mt-5 p-4">
+        <Form
+          onSubmit={handleSubmitReview}
+          className="shadow-sm rounded mt-5 p-4"
+        >
           <h5>Add Review</h5>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Control as="textarea" rows={4} />
+            <Form.Control name="review" as="textarea" rows={4} />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Button type="submit" className="px-4">
+            <Button variant="dark" type="submit" className="px-4">
               Submit
             </Button>
           </Form.Group>
