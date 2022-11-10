@@ -16,7 +16,7 @@ const ServiceDetails = () => {
       .then((res) => res.json())
       .then((data) => setReviews(data))
       .catch((error) => console.error(error));
-  }, []);
+  }, [_id]);
 
   const handleSubmitReview = (event) => {
     event.preventDefault();
@@ -32,6 +32,7 @@ const ServiceDetails = () => {
       photoURL: user?.photoURL,
       message,
     };
+    setReviews([...reviews, review]);
     fetch("http://localhost:5000/reviews", {
       method: "POST",
       headers: {
@@ -42,7 +43,7 @@ const ServiceDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         form.reset();
-        console.log(data);
+
         if (data.acknowledged) {
           alert("Review Submited Successfully");
         }
