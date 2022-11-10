@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -47,13 +47,22 @@ const Header = () => {
               Blog
             </Link>
             {user?.uid ? (
-              <Button
-                variant="dark"
-                onClick={handleSignOut}
-                className="rounded-pill"
-              >
-                Logout
-              </Button>
+              <>
+                <Link className="nav-link p-0">
+                  <Image
+                    style={{ height: "40px" }}
+                    roundedCircle
+                    src={user?.photoURL}
+                  ></Image>
+                </Link>
+                <Button
+                  variant="dark"
+                  onClick={handleSignOut}
+                  className="rounded-pill"
+                >
+                  Logout
+                </Button>
+              </>
             ) : (
               <Link to="/login" className="nav-link">
                 Login

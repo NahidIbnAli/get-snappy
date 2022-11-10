@@ -1,14 +1,19 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
 
-const Review = () => {
+const Review = ({ review }) => {
+  const { name, photoURL, message } = review;
   return (
     <Col>
-      <Card className="border-0 shadow-sm">
-        <Card.Body className="p-4 pt-0">
-          <Card.Img src={image} className="rounded-3" />
-          <Card.Title className="fs-3 fw-bold mt-0 mb-3">{name}</Card.Title>
-          <Card.Text>{description}</Card.Text>
+      <Card className="shadow-sm border-0">
+        <Card.Body className="p-4 text-center">
+          <Card.Img
+            src={photoURL}
+            className="rounded-circle"
+            style={{ width: "60px" }}
+          />
+          <Card.Title className="fs-3 fw-bold">{name}</Card.Title>
+          <Card.Text>{message}</Card.Text>
         </Card.Body>
       </Card>
     </Col>

@@ -1,57 +1,116 @@
-import React from "react";
-import { Button, Card, Container, Form } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { PhotoProvider, PhotoView } from "react-photo-view";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../../contexts/UserContext";
+import Review from "../Reviews/Review";
 import "./ServiceDetails.css";
 
 const ServiceDetails = () => {
+  const { user } = useContext(AuthContext);
   const { _id, image, name, price, description } = useLoaderData();
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/reviews?id=${_id}`)
+      .then((res) => res.json())
+      .then((data) => setReviews(data))
+      .catch((error) => console.error(error));
+  }, []);
 
   const handleSubmitReview = (event) => {
     event.preventDefault();
     const form = event.target;
-    const review = form.review.value;
-    const user = {
+    const message = form.message.value;
+    const review = {
       serviceId: _id,
-      // email,
-      review,
+      serviceName: name,
+      image,
+      price,
+      name: user?.displayName,
+      email: user?.email,
+      photoURL: user?.photoURL,
+      message,
     };
-    fetch("");
+    fetch("http://localhost:5000/reviews", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(review),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        form.reset();
+        console.log(data);
+        if (data.acknowledged) {
+          alert("Review Submited Successfully");
+        }
+      })
+      .catch((error) => console.error(error));
   };
+
   return (
     <div>
-      <Container className="w-half pt-3 pb-5">
+      <Container className="pt-3 pb-5">
         {/* service details section */}
-        <Card className="border-0 shadow-sm">
-          <div className="p-4">
+        <Row className="g-5">
+          <Col lg="6">
             <PhotoProvider>
               <PhotoView src={image}>
                 <Card.Img src={image} className="rounded-3" />
               </PhotoView>
             </PhotoProvider>
-          </div>
-          <Card.Body className="p-4 pt-0">
+          </Col>
+          <Col lg="6">
             <Card.Title className="fs-3 fw-bold mt-0 mb-3">{name}</Card.Title>
+            <Card.Text className="fw-semibold">Price : ${price}</Card.Text>
             <Card.Text>{description}</Card.Text>
-            <Card.Text className="fw-semibold">${price}</Card.Text>
-          </Card.Body>
-        </Card>
+          </Col>
+        </Row>
         {/* review section */}
-        {/* form for adding review */}
-        <Form
-          onSubmit={handleSubmitReview}
-          className="shadow-sm rounded mt-5 p-4"
-        >
-          <h5>Add Review</h5>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Control name="review" as="textarea" rows={4} />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Button variant="dark" type="submit" className="px-4">
-              Submit
-            </Button>
-          </Form.Group>
-        </Form>
+        <Row>
+          <h3 className="display-5 fw-semibold text-center py-5">Reviews</h3>
+
+          <Col lg="6" className="d-flex flex-column gap-4">
+            {reviews.map((review) => (
+              <Review key={review._id} review={review}></Review>
+            ))}
+          </Col>
+          {/* review form */}
+          <Col lg="6">
+            {user?.uid ? (
+              <Form
+                onSubmit={handleSubmitReview}
+                className="shadow-sm rounded mt-4 mt-lg-0 p-4"
+              >
+                <h5>Add Review</h5>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlTextarea1"
+                >
+                  <Form.Control name="message" as="textarea" rows={4} />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Button variant="dark" type="submit" className="px-4">
+                    Submit
+                  </Button>
+                </Form.Group>
+              </Form>
+            ) : (
+              <p className="text-center py-4 lead">
+                Please{" "}
+                <Link
+                  to="/login"
+                  className="fw-semibold text-decoration-none text-dark"
+                >
+                  login
+                </Link>{" "}
+                to add a review
+              </p>
+            )}
+          </Col>
+        </Row>
       </Container>
     </div>
   );
