@@ -1,7 +1,7 @@
 # **Get Snappy**
 
-<a  href="https://coding-ninja-ffac7.web.app/">
-<img  width="100%"  height="100%"  src="https://i.ibb.co/2ZMM3b3/Get-Snappy.png"/>
+<a  href="https://get-snappy.web.app/">
+<img  width="100%"  height="100%"  src="https://i.ibb.co/S6bYCGY/Get-Snappy.jpg"/>
 </a>
 
 ## About & Features
@@ -27,4 +27,4 @@
 - **Express**
 - **MongoDB**
 
-### `Website Link :` [https://coding-ninja-ffac7.web.app](https://coding-ninja-ffac7.web.app)
+### `Website Link :` [https://get-snappy.web.app/](https://get-snappy.web.app/)

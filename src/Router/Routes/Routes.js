@@ -31,7 +31,7 @@ export const routes = createBrowserRouter([
       {
         path: "services/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/services/${params.id}`),
+          fetch(`https://get-snappy-server.vercel.app/services/${params.id}`),
         element: <ServiceDetails></ServiceDetails>,
       },
       {

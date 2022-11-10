@@ -6,6 +6,7 @@ import { AuthContext } from "../../../contexts/UserContext";
 import Review from "../Reviews/Review";
 import "./ServiceDetails.css";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
@@ -13,7 +14,7 @@ const ServiceDetails = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?id=${_id}`)
+    fetch(`https://get-snappy-server.vercel.app/reviews?id=${_id}`)
       .then((res) => res.json())
       .then((data) => setReviews(data))
       .catch((error) => console.error(error));
@@ -34,7 +35,7 @@ const ServiceDetails = () => {
       message,
     };
     setReviews([...reviews, review]);
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://get-snappy-server.vercel.app/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -53,6 +54,10 @@ const ServiceDetails = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Services Details</title>
+      </Helmet>
+      ;
       <Container className="pt-3 pb-5">
         {/* service details section */}
         <Row className="g-5">

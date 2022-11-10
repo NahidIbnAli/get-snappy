@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { Helmet } from "react-helmet-async";
+import { AuthContext } from "../../contexts/UserContext";
 import ServiceItem from "../Home/ServicesContainer/ServiceItem";
 
 const Services = () => {
   const [services, setServices] = useState([]);
+  const { loading } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/services")
+    fetch("https://get-snappy-server.vercel.app/services")
       .then((res) => res.json())
       .then((data) => setServices(data))
       .catch((error) => console.error(error));
@@ -14,16 +17,25 @@ const Services = () => {
 
   return (
     <div className="pt-4 pb-5">
-      <Container>
-        <h2 className="display-5 fw-semibold text-center">Services</h2>
-        <Row className="py-4 g-4">
-          {services?.map((service) => (
-            <Col md="6" xl="4" key={service._id}>
-              <ServiceItem service={service}></ServiceItem>
-            </Col>
-          ))}
-        </Row>
-      </Container>
+      <Helmet>
+        <title>Services</title>
+      </Helmet>
+      {loading ? (
+        <div className="text-center py-5">
+          <Spinner animation="border" variant="dark" />
+        </div>
+      ) : (
+        <Container>
+          <h2 className="display-5 fw-semibold text-center">Services</h2>
+          <Row className="py-4 g-4">
+            {services?.map((service) => (
+              <Col md="6" xl="4" key={service._id}>
+                <ServiceItem service={service}></ServiceItem>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      )}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "./AddService.css";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AddService = () => {
   const handleAddService = (event) => {
@@ -19,7 +20,7 @@ const AddService = () => {
       price,
       description,
     };
-    fetch(`http://localhost:5000/services`, {
+    fetch(`https://get-snappy-server.vercel.app/services`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -38,6 +39,10 @@ const AddService = () => {
 
   return (
     <div className="w-60 mx-auto">
+      <Helmet>
+        <title>Add Service</title>
+      </Helmet>
+      ;
       <Container className="py-5">
         <h2 className="text-center display-5 fw-semibold mb-4">
           Add New Service

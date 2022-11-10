@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import image from "../../assets/Privacy policy-rafiki.png";
 import "./Login.css";
 import { AuthContext } from "../../contexts/UserContext";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { signIn, signInGoogle } = useContext(AuthContext);
@@ -40,6 +41,9 @@ const Login = () => {
 
   return (
     <div className="py-5">
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <Container>
         <Row className="justify-content-center align-items-center">
           <Col md="5">

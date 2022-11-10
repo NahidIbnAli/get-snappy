@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import image from "../../assets/Privacy policy-rafiki.png";
 import { AuthContext } from "../../contexts/UserContext";
+import { Helmet } from "react-helmet-async";
 
 const SignUp = () => {
   const { signUp, signInGoogle, updateUserProfile } = useContext(AuthContext);
@@ -38,6 +39,9 @@ const SignUp = () => {
 
   return (
     <div className="py-5">
+      <Helmet>
+        <title>Sign Up</title>
+      </Helmet>
       <Container>
         <Row className="justify-content-center align-items-center">
           <Col md="5">

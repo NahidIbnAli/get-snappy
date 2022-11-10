@@ -1,10 +1,15 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import { Helmet } from "react-helmet-async";
 import "./Blog.css";
 
 const Blog = () => {
   return (
     <div className="py-5">
+      <Helmet>
+        <title>Blog</title>
+      </Helmet>
+      ;
       <Container className="w-40">
         <div className="gridRow">
           <div className="p-4 rounded-4 bg-light">

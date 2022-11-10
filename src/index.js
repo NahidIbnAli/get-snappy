@@ -5,12 +5,15 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserContext from "./contexts/UserContext";
+import { HelmetProvider } from "react-helmet-async";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <UserContext>
-      <App />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
     </UserContext>
   </React.StrictMode>
 );
