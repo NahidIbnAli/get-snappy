@@ -20,7 +20,7 @@ const Services = () => {
   return (
     <div className="pt-4 pb-5">
       <Helmet>
-        <title>Services</title>
+        <title>Services - Get Snappy</title>
       </Helmet>
       {loading ? (
         <div className="text-center py-5">

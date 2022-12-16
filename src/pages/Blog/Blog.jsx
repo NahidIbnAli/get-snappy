@@ -7,7 +7,7 @@ const Blog = () => {
   return (
     <div className="py-5">
       <Helmet>
-        <title>Blog</title>
+        <title>Blog - Get Snappy</title>
       </Helmet>
       <Container className="w-40">
         <div className="gridRow">

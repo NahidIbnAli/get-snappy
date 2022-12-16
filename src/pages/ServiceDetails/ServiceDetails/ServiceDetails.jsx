@@ -55,7 +55,7 @@ const ServiceDetails = () => {
   return (
     <div>
       <Helmet>
-        <title>Services Details</title>
+        <title>Services Details - Get Snappy</title>
       </Helmet>
       <Container className="pt-3 pb-5">
         {/* service details section */}

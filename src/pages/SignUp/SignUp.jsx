@@ -51,7 +51,7 @@ const SignUp = () => {
   return (
     <div className="py-5">
       <Helmet>
-        <title>Sign Up</title>
+        <title>Sign Up - Get Snappy</title>
       </Helmet>
       <Container>
         <Row className="justify-content-center align-items-center">
