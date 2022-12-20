@@ -38,9 +38,9 @@ const AddService = () => {
   };
 
   return (
-    <div className="w-60 mx-auto">
+    <div className="w-60 mx-auto pt-4 pb-5 mb-2">
       <Helmet>
-        <title>Add Service</title>
+        <title>Add Service - Get Snappy</title>
       </Helmet>
       <Container className="py-5">
         <h2 className="text-center display-5 fw-semibold mb-4">

@@ -1,17 +1,13 @@
 import React, { useContext } from "react";
-import { Spinner } from "react-bootstrap";
 import { Navigate, useLocation } from "react-router-dom";
+import Loading from "../../component/Loading";
 import { AuthContext } from "../../contexts/UserContext";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
   if (loading) {
-    return (
-      <div className="text-center py-5">
-        <Spinner animation="border" variant="dark" />
-      </div>
-    );
+    return <Loading></Loading>;
   }
   if (user && user.uid) {
     return children;

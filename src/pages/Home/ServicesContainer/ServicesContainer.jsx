@@ -2,16 +2,30 @@ import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import PuffLoader from "react-spinners/PuffLoader";
 import ServiceItem from "./ServiceItem";
 
 const ServicesContainer = () => {
   const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     fetch("https://get-snappy-server.vercel.app/services?limited=true")
       .then((res) => res.json())
-      .then((data) => setServices(data))
+      .then((data) => {
+        setServices(data);
+        setLoading(false);
+      })
       .catch((error) => console.error(error));
   }, []);
+
+  if (loading) {
+    return (
+      <div className="d-flex justify-content-center py-5 my-5">
+        <PuffLoader color="#212529" size={100} />
+      </div>
+    );
+  }
 
   return (
     <div className="py-5 text-center">

@@ -20,7 +20,7 @@ const ServiceItem = ({ service }) => {
           <Card.Text>{description.slice(0, 100) + "..."}</Card.Text>
         </div>
         <div className="d-flex justify-content-between align-items-center pt-3">
-          <Card.Text className="fw-semibold m-0">${price}</Card.Text>
+          <Card.Text className="fw-bold fs-4 m-0">${price}</Card.Text>
           <Link to={`/services/${_id}`}>
             <Button variant="dark">View Details</Button>
           </Link>

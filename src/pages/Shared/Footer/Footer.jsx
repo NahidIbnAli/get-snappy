@@ -8,7 +8,7 @@ import { SlLocationPin } from "react-icons/sl";
 
 const Footer = () => {
   return (
-    <div className="bg-light pt-5 pb-4">
+    <div className="bg-light py-5">
       <Container>
         <div className="d-flex flex-column gap-3 flex-md-row justify-content-between">
           <div md="4">

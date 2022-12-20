@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
+import Loading from "../../component/Loading";
 import ServiceItem from "../Home/ServicesContainer/ServiceItem";
 
 const Services = () => {
@@ -18,14 +19,12 @@ const Services = () => {
   }, []);
 
   return (
-    <div className="pt-4 pb-5">
+    <div className="pt-4 pb-5 min-vh-100">
       <Helmet>
         <title>Services - Get Snappy</title>
       </Helmet>
       {loading ? (
-        <div className="text-center py-5">
-          <Spinner animation="border" variant="dark" />
-        </div>
+        <Loading></Loading>
       ) : (
         <Container>
           <h2 className="display-5 fw-semibold text-center">Services</h2>
