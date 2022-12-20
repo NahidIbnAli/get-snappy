@@ -4,13 +4,13 @@ import image from "../../../assets/profile.jpg";
 
 const About = () => {
   return (
-    <div className="pb-5">
+    <div className="pb-5 my-lg-4">
       <Container>
         <h2 className="text-center display-5 fw-semibold mb-5">About Me</h2>
-        <Row className="align-items-center g-4">
-          <Col lg="6">
+        <Row className="align-items-center justify-content-center g-5">
+          <Col lg="3">
             <img
-              className="img-fluid rounded mx-auto d-block d-lg-inline"
+              className="img-fluid rounded-circle mx-auto d-block d-lg-inline"
               src={image}
               alt=""
             />
