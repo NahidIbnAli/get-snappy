@@ -80,7 +80,10 @@ const Header = () => {
                 </Link>
               </OverlayTrigger>
             ) : (
-              <Link to="/login" className="nav-link">
+              <Link
+                to="/login"
+                className="nav-link bg-dark rounded-pill px-3 text-light btn"
+              >
                 Login
               </Link>
             )}

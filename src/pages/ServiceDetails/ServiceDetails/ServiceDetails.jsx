@@ -57,9 +57,9 @@ const ServiceDetails = () => {
       <Helmet>
         <title>Services Details - Get Snappy</title>
       </Helmet>
-      <Container className="pt-3 pb-5">
+      <Container className="pt-4 pb-5">
         {/* service details section */}
-        <Row className="g-5">
+        <Row className="gy-3 gx-lg-5">
           <Col lg="6">
             <PhotoProvider>
               <PhotoView src={image}>
@@ -68,8 +68,10 @@ const ServiceDetails = () => {
             </PhotoProvider>
           </Col>
           <Col lg="6">
-            <Card.Title className="fs-3 fw-bold mt-0 mb-3">{name}</Card.Title>
-            <Card.Text className="fw-semibold">Price : ${price}</Card.Text>
+            <Card.Title className="fs-3 fw-bold mt-0 mb-2">{name}</Card.Title>
+            <Card.Text className="fw-bold fs-5 mb-2">
+              Price : ${price}
+            </Card.Text>
             <Card.Text>{description}</Card.Text>
           </Col>
         </Row>

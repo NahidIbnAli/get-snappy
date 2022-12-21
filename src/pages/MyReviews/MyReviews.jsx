@@ -5,6 +5,7 @@ import ReviewCard from "./ReviewCard";
 import { toast } from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import Loading from "../../component/Loading";
+import swal from "sweetalert";
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
@@ -26,21 +27,30 @@ const MyReviews = () => {
   }, [user?.email]);
 
   const handleDelete = (id) => {
-    const proceed = window.confirm(
-      "Are you sure you want to remove this review"
-    );
-    if (proceed) {
-      fetch(`https://get-snappy-server.vercel.app/reviews/${id}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          const filterdReviews = reviews.filter((review) => review._id !== id);
-          setReviews(filterdReviews);
-          toast.success("Deleted Successfully");
+    swal({
+      title: "Are you sure?",
+      text: "Are you sure you want to delete this review",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        fetch(`https://get-snappy-server.vercel.app/reviews/${id}`, {
+          method: "DELETE",
         })
-        .catch((error) => console.error(error));
-    }
+          .then((res) => res.json())
+          .then((data) => {
+            const filterdReviews = reviews.filter(
+              (review) => review._id !== id
+            );
+            setReviews(filterdReviews);
+            swal("The review has been deleted!", {
+              icon: "success",
+            });
+          })
+          .catch((error) => console.error(error));
+      }
+    });
   };
 
   return (
