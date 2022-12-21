@@ -1,0 +1,31 @@
+[debug] [2022-12-21T23:52:15.478Z] ----------------------------------------------------------------------
+[debug] [2022-12-21T23:52:15.480Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\nahid\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-12-21T23:52:15.480Z] CLI Version:   11.18.0
+[debug] [2022-12-21T23:52:15.480Z] Platform:      win32
+[debug] [2022-12-21T23:52:15.480Z] Node Version:  v18.12.1
+[debug] [2022-12-21T23:52:15.481Z] Time:          Thu Dec 22 2022 05:52:15 GMT+0600 (Bangladesh Standard Time)
+[debug] [2022-12-21T23:52:15.481Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-12-21T23:52:15.484Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2022-12-21T23:52:15.586Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-12-21T23:52:15.586Z] > authorizing via signed-in user (nahidibnali7@gmail.com)
+[debug] [2022-12-21T23:52:15.587Z] [iam] checking project get-snappy for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-12-21T23:52:15.588Z] > refreshing access token with scopes: []
+[debug] [2022-12-21T23:52:15.589Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-12-21T23:52:15.589Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-12-21T23:52:15.915Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-12-21T23:52:15.915Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-12-21T23:52:15.925Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/get-snappy:testIamPermissions [none]
+[debug] [2022-12-21T23:52:15.926Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/get-snappy:testIamPermissions x-goog-quota-user=projects/get-snappy
+[debug] [2022-12-21T23:52:15.926Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/get-snappy:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-21T23:52:16.251Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2022-12-21T23:52:16.251Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[debug] [2022-12-21T23:52:17.232Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/get-snappy:testIamPermissions 200
+[debug] [2022-12-21T23:52:17.232Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/get-snappy:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-21T23:52:17.233Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/get-snappy [none]
+[debug] [2022-12-21T23:52:38.327Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/get-snappy
+[debug] [2022-12-21T23:52:38.614Z] FirebaseError: Failed to make request to https://firebase.googleapis.com/v1beta1/projects/get-snappy
+    at RetryOperation._fn (C:\Users\nahid\AppData\Roaming\npm\node_modules\firebase-tools\lib\apiv2.js:242:31)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: Failed to get Firebase project get-snappy. Please make sure the project exists and your account has permission to access it.

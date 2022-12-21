@@ -17,7 +17,10 @@ const UpdateReview = ({ show, handleClose, editedReview, refetch }) => {
     setSaveBtnLoading(true);
     const updateReview = { review: data.message };
     axios
-      .put(`http://localhost:5000/reviews/${_id}`, updateReview)
+      .put(
+        `https://get-snappy-server-nahidibnali.vercel.app/reviews/${_id}`,
+        updateReview
+      )
       .then((response) => {
         if (response.data.modifiedCount > 0) {
           setSaveBtnLoading(false);
