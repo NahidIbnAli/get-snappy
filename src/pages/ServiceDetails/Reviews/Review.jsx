@@ -12,7 +12,7 @@ const Review = ({ review }) => {
             className="rounded-circle"
             style={{ width: "60px" }}
           />
-          <Card.Title className="fs-3 fw-bold">{name}</Card.Title>
+          <Card.Title className="fs-4 fw-bold">{name}</Card.Title>
           <Card.Text>{message}</Card.Text>
         </Card.Body>
       </Card>

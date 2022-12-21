@@ -6,15 +6,19 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserContext from "./contexts/UserContext";
 import { HelmetProvider } from "react-helmet-async";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <HelmetProvider>
-      <UserContext>
-        <App />
-      </UserContext>
-    </HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <HelmetProvider>
+        <UserContext>
+          <App />
+        </UserContext>
+      </HelmetProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

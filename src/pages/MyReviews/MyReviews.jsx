@@ -1,30 +1,42 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { AuthContext } from "../../contexts/UserContext";
 import ReviewCard from "./ReviewCard";
-import { toast } from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import Loading from "../../component/Loading";
 import swal from "sweetalert";
+import UpdateReview from "../ServiceDetails/Reviews/UpdateReview";
+import { useQuery } from "@tanstack/react-query";
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
-  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [noReviews, setNoReviews] = useState(false);
+  const [show, setShow] = useState(false);
+  const [editedReview, setEditedReview] = useState({});
 
-  useEffect(() => {
-    fetch(`https://get-snappy-server.vercel.app/reviews?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setReviews(data);
+  const handleClose = () => setShow(false);
+  const handleShow = (_id, serviceName, message) => {
+    setEditedReview({ _id, serviceName, message });
+    setShow(true);
+  };
+
+  const { data: reviews = [], refetch } = useQuery({
+    queryKey: ["reviews", user?.email],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://get-snappy-server.vercel.app/reviews?email=${user?.email}`
+      );
+      const data = await res.json();
+      if (data) {
         setLoading(false);
         if (data.length === 0) {
           setNoReviews(true);
         }
-      })
-      .catch((error) => console.error(error));
-  }, [user?.email]);
+      }
+      return data;
+    },
+  });
 
   const handleDelete = (id) => {
     swal({
@@ -40,10 +52,7 @@ const MyReviews = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            const filterdReviews = reviews.filter(
-              (review) => review._id !== id
-            );
-            setReviews(filterdReviews);
+            refetch();
             swal("The review has been deleted!", {
               icon: "success",
             });
@@ -71,11 +80,18 @@ const MyReviews = () => {
               <ReviewCard
                 review={review}
                 handleDelete={handleDelete}
+                handleShow={handleShow}
               ></ReviewCard>
             </Col>
           ))}
         </Row>
       </Container>
+      <UpdateReview
+        show={show}
+        handleClose={handleClose}
+        editedReview={editedReview}
+        refetch={refetch}
+      ></UpdateReview>
     </div>
   );
 };

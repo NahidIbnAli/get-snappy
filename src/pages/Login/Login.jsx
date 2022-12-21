@@ -43,6 +43,7 @@ const Login = () => {
     signInGoogle()
       .then((result) => {
         navigate(from, { replace: true });
+        console.log("heyll");
       })
       .catch((error) => console.error(error));
   };

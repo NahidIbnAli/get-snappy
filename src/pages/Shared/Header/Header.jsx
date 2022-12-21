@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext } from "react";
 import { Button, Image, OverlayTrigger, Popover } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -82,7 +82,7 @@ const Header = () => {
             ) : (
               <Link
                 to="/login"
-                className="nav-link bg-dark rounded-pill px-3 text-light btn"
+                className="nav-link bg-dark rounded px-3 text-light btn"
               >
                 Login
               </Link>

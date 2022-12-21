@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link, useLoaderData } from "react-router-dom";
@@ -7,18 +7,22 @@ import Review from "../Reviews/Review";
 import "./ServiceDetails.css";
 import { toast } from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import { useQuery } from "@tanstack/react-query";
 
 const ServiceDetails = () => {
   const { user } = useContext(AuthContext);
   const { _id, image, name, price, description } = useLoaderData();
-  const [reviews, setReviews] = useState([]);
 
-  useEffect(() => {
-    fetch(`https://get-snappy-server.vercel.app/reviews?id=${_id}`)
-      .then((res) => res.json())
-      .then((data) => setReviews(data))
-      .catch((error) => console.error(error));
-  }, [_id]);
+  const { data: reviews = [], refetch } = useQuery({
+    queryKey: ["reviews", _id],
+    queryFn: async () => {
+      const res = await fetch(
+        `https://get-snappy-server.vercel.app/reviews?id=${_id}`
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
 
   const handleSubmitReview = (event) => {
     event.preventDefault();
@@ -28,13 +32,11 @@ const ServiceDetails = () => {
       serviceId: _id,
       serviceName: name,
       image,
-      price,
+      message,
       name: user?.displayName,
       email: user?.email,
-      photoURL: user?.photoURL,
-      message,
+      photoURL: user?.photoURL || "https://i.ibb.co/RzLyywb/user.png",
     };
-    setReviews([...reviews, review]);
     fetch("https://get-snappy-server.vercel.app/reviews", {
       method: "POST",
       headers: {
@@ -46,6 +48,7 @@ const ServiceDetails = () => {
       .then((data) => {
         form.reset();
         if (data.acknowledged) {
+          refetch();
           toast.success("Review Submited Successfully");
         }
       })
