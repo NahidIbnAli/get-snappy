@@ -13,6 +13,7 @@ import { FcGoogle } from "react-icons/fc";
 import image from "../../assets/Privacy policy-rafiki.png";
 import { AuthContext } from "../../contexts/UserContext";
 import { Helmet } from "react-helmet-async";
+import { toast } from "react-hot-toast";
 
 const SignUp = () => {
   const { signUp, signInGoogle, updateUserProfile, loading, setLoading } =
@@ -32,10 +33,12 @@ const SignUp = () => {
       .then((result) => {
         form.reset();
         updateUserProfile(name, photoUrl);
+        toast.success("User created successfully");
         navigate(from, { replace: true });
       })
       .catch((error) => {
         setLoading(false);
+        toast.error(error.message);
         console.error(error);
       });
   };
@@ -109,11 +112,15 @@ const SignUp = () => {
                       className="w-100 fw-semibold"
                       type="submit"
                     >
-                      {loading ? (
-                        <Spinner animation="border" variant="light" />
-                      ) : (
-                        <span>Sign Up</span>
+                      {loading && (
+                        <Spinner
+                          animation="border"
+                          variant="light"
+                          size="sm"
+                          className="me-2"
+                        />
                       )}
+                      Sign Up
                     </Button>
                   </Form.Group>
                 </Form>

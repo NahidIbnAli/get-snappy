@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Button, Image } from "react-bootstrap";
+import React, { useContext, useRef, useState } from "react";
+import { Button, Image, OverlayTrigger, Popover } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -42,27 +42,43 @@ const Header = () => {
                 </Link>
               </>
             )}
-
             <Link to="/blog" className="nav-link">
               Blog
             </Link>
             {user?.uid ? (
-              <>
+              <OverlayTrigger
+                trigger="click"
+                key="bottom"
+                placement="bottom"
+                overlay={
+                  <Popover id="popover-positioned-bottom">
+                    <Popover.Body className="text-center pt-2">
+                      <strong className="d-block">{user?.displayName}</strong>
+                      <strong className="d-block">{user?.email}</strong>
+                      <Button
+                        onClick={handleSignOut}
+                        variant="outline-danger"
+                        size="sm"
+                        className="px-1 py-0 mt-1"
+                      >
+                        Logout
+                      </Button>
+                    </Popover.Body>
+                  </Popover>
+                }
+              >
                 <Link className="nav-link p-0">
                   <Image
-                    style={{ height: "40px" }}
+                    style={{
+                      height: "40px",
+                      width: "40px",
+                      objectFit: "cover",
+                    }}
                     roundedCircle
-                    src={user?.photoURL}
+                    src={user?.photoURL || "https://i.ibb.co/RzLyywb/user.png"}
                   ></Image>
                 </Link>
-                <Button
-                  variant="dark"
-                  onClick={handleSignOut}
-                  className="rounded-pill"
-                >
-                  Logout
-                </Button>
-              </>
+              </OverlayTrigger>
             ) : (
               <Link to="/login" className="nav-link">
                 Login

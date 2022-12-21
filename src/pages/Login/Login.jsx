@@ -43,7 +43,6 @@ const Login = () => {
     signInGoogle()
       .then((result) => {
         navigate(from, { replace: true });
-        console.log(result.user);
       })
       .catch((error) => console.error(error));
   };
@@ -93,11 +92,15 @@ const Login = () => {
                       className="w-100 fw-semibold"
                       type="submit"
                     >
-                      {loading ? (
-                        <Spinner animation="border" variant="light" />
-                      ) : (
-                        <span>Login</span>
+                      {loading && (
+                        <Spinner
+                          animation="border"
+                          variant="light"
+                          size="sm"
+                          className="me-2"
+                        />
                       )}
+                      Login
                     </Button>
                   </Form.Group>
                 </Form>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { AuthContext } from "../../contexts/UserContext";
 import ReviewCard from "./ReviewCard";
 import { toast } from "react-hot-toast";
@@ -10,6 +10,7 @@ const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [noReviews, setNoReviews] = useState(false);
 
   useEffect(() => {
     fetch(`https://get-snappy-server.vercel.app/reviews?email=${user?.email}`)
@@ -17,6 +18,9 @@ const MyReviews = () => {
       .then((data) => {
         setReviews(data);
         setLoading(false);
+        if (data.length === 0) {
+          setNoReviews(true);
+        }
       })
       .catch((error) => console.error(error));
   }, [user?.email]);
@@ -46,7 +50,11 @@ const MyReviews = () => {
       </Helmet>
       <Container>
         {loading && <Loading></Loading>}
-
+        {noReviews && (
+          <h3 className="display-5 fw-semibold text-center pt-5">
+            No reviews are found
+          </h3>
+        )}
         <Row className="g-4">
           {reviews.map((review) => (
             <Col md="6" lg="4" key={review._id}>

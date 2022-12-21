@@ -38,7 +38,10 @@ const Contact = () => {
     <div>
       <Container>
         <h2 className="text-center display-5 fw-semibold mb-3">Get In Touch</h2>
-        <Row className="align-items-center">
+        <Row className="align-items-center flex-row-reverse">
+          <Col lg="6">
+            <img className="img-fluid" src={image} alt="" />
+          </Col>
           <Col lg="6">
             <p className="mb-4">
               If you want to hire me for photography services, you can drop a
@@ -81,9 +84,6 @@ const Contact = () => {
                 )}
               </Button>
             </Form>
-          </Col>
-          <Col lg="6">
-            <img className="img-fluid" src={image} alt="" />
           </Col>
         </Row>
       </Container>
